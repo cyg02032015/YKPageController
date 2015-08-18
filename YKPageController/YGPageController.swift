@@ -1,6 +1,6 @@
 //
 //  YGPageController.swift
-//  
+//
 //
 //  Created by C on 15/8/10.
 //
@@ -8,12 +8,22 @@
 
 import UIKit
 
-
+public enum MenuViewStyle: Int {
+    case Default = 0
+    case Line
+    case Bigger
+}
 
 public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDelegate, MenuViewDelegate{
-
+    
     //MARK: 公共变量门
     public var menuHeight: CGFloat = 40
+    public var cacheCount: Int!
+    public var backGroundColor: UIColor = UIColor.whiteColor()
+    public var titleColor: UIColor = UIColor.blackColor()
+    public var titleSelectedColor: UIColor = UIColor.orangeColor()
+    public var titleFont: CGFloat = 16
+    var menuViewStyle: MenuViewStyle = .Default
     //MARK: 私有变量门
     private lazy var viewControllers: [AnyClass] = []
     private lazy var titles: [String] = Array()
@@ -22,20 +32,19 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
     private var scrollView: UIScrollView!
     private var menuView: MenuView!
     private lazy var dispalyVC: [Int:UIViewController] = [:]
-    public var cacheCount: Int!
-    private lazy var controllerCache: NSCache = {
-        [weak self] in
-        var cache = NSCache()
-        cache.delegate = self
-        if self!.cacheCount == nil {
-            cache.countLimit = 3
-        } else {
-            cache.countLimit = self!.cacheCount
-        }
-        return cache
-    }()
     private var selectController: UIViewController!
     private var selectIndex: Int = -1
+    private lazy var controllerCache: NSCache = self.lazyControllerCache()
+    private func lazyControllerCache() -> NSCache {
+        var cache = NSCache()
+        cache.delegate = self
+        if cacheCount == nil {
+            cache.countLimit = 3
+        } else {
+            cache.countLimit = cacheCount
+        }
+        return cache
+    }
     public func loadViewControllers(vcArr: [AnyClass], andTitles titleArr:[String]) {
         self.viewControllers = vcArr
         self.titles = titleArr
@@ -47,10 +56,9 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
         
     }
     public override func viewWillLayoutSubviews() {
-        menuView = MenuView(frame: CGRect(x: 0, y:NAVIHEIGHT, width: WIDTH, height: menuHeight), andTitles: titles)
+        menuView = MenuView(frame: CGRect(x: 0, y:NAVIHEIGHT, width: WIDTH, height: menuHeight), andTitles: titles, andBackgroundcolor: backGroundColor, andTitleColor: titleColor, andTilteSelectedColor: titleSelectedColor, andTitleFont: titleFont, andStyle: menuViewStyle)
         menuView.delegate = self
         view.addSubview(menuView)
-        menuView.backgroundColor = UIColor.redColor()
         scrollView = UIScrollView(frame: CGRect(x: 0, y: NAVIHEIGHT + menuHeight, width: WIDTH, height: HEIGHT - menuHeight - NAVIHEIGHT))
         view.addSubview(scrollView)
         scrollView.delegate = self
@@ -75,7 +83,6 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
         dispalyVC[index] = vc
         scrollView.addSubview(vc.view)
         selectController = vc
-        
     }
     private func removeViewController(viewController: UIViewController, atIndex index: Int) {
         viewController.view.removeFromSuperview()
@@ -106,7 +113,6 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
     }
     //MARK: menuViewDelegate
     public func menuViewBtnClickScrollToView(index: Int) {
-        CGLog("\(index)")
         removeViewController(selectController, atIndex: selectIndex)
         selectIndex = index
         var vc = dispalyVC[index] as UIViewController?
@@ -144,6 +150,7 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
                 }
             }
         }
+        selectController = dispalyVC[page]
         menuView.menuViewButtonMove(page, andRate: rate)
     }
     public func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -153,14 +160,27 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
         NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil, userInfo: ["index":page])
     }
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.x < 0 || scrollView.contentOffset.x + WIDTH >= scrollView.contentSize.width {return}
+//        var page: Int!
+//        if decelerate {
+//            page = Int(scrollView.contentOffset.x / WIDTH)
+//            if page == 0 {
+//                menuView.selectItemWithIndex(page, andOtherIndex: page + 1)
+//            } else if page == viewControllers.count - 1 {
+//                menuView.selectItemWithIndex(page, andOtherIndex: page - 1)
+//            } else {
+//                menuView.selectItemWithIndex(page, andOtherIndex: page + 1)
+//                menuView.selectItemWithIndex(page, andOtherIndex: page - 1)
+//            }
+//        }
     }
     public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
     //MARK: NSCacheDelegate
     public func cache(cache: NSCache, willEvictObject obj: AnyObject) {
-        CGLog(obj)
+        //        CGLog(obj)
     }
-
+    
 }
