@@ -13,11 +13,12 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT), style: UITableViewStyle.Plain)
+        self.automaticallyAdjustsScrollViewInsets = false
+        tableView = UITableView(frame: CGRect(x: 0, y: 0, width: WIDTH, height: HEIGHT), style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        tableView.registerClass(TBTableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+        tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,11 +29,14 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return 20
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TBTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         cell.textLabel?.text = "nimabi"
         return cell
     }
-
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = UIViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     /*
     // MARK: - Navigation
 

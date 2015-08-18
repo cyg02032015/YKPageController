@@ -8,17 +8,11 @@
 
 import UIKit
 
-class YGGlobel: UITableViewCell {
+func CGLog<T>(message: T,file: String = __FILE__,function: String = __FUNCTION__,line: Int = __LINE__) {
+    println("\(file.lastPathComponent)[\(line)], \(function)---:\(message)")
+}
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+func fontWithCGFloat(font: CGFloat) ->UIFont {
+   return UIFont.systemFontOfSize(font)
 }

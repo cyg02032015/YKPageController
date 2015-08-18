@@ -16,14 +16,23 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc1 = TBViewController()
-        let vc2 = UIViewController()
-        vc2.view.backgroundColor = UIColor.redColor()
-        var vcs = [vc2,vc2]
-        var titles = ["1", "2", "3"]
+        self.automaticallyAdjustsScrollViewInsets = false
+        let vc1: AnyClass = TBViewController().classForCoder
+//        let vc2 = TBViewController()
+//        let vc3 = TBViewController()
+//        let vc4 = TBViewController()
+//        let vc5 = TBViewController()
+//        let vc6 = TBViewController()
+//        let vc7 = TBViewController()
+//        let vc8 = TBViewController()
+//        let vc9 = TBViewController()
+//        let vc10 = TBViewController()
+        var vcs = [vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1]
+        var titles = ["新闻", "专题", "视频","游戏中心","马甲","weibo","Picth","Swift", "木木","Joke"]
         let pageController = YGPageController()
         pageController.loadViewControllers(vcs, andTitles: titles)
         pageController.view.backgroundColor = UIColor.yellowColor()
+        self.addChildViewController(pageController)
         view.addSubview(pageController.view)
         
     }
