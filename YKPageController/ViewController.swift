@@ -8,9 +8,7 @@
 
 import UIKit
 
-let NAVIHEIGHT: CGFloat = 64
-let WIDTH = UIScreen.mainScreen().bounds.width
-let HEIGHT = UIScreen.mainScreen().bounds.height
+
 
 class ViewController: UIViewController {
 
@@ -18,11 +16,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         let vc1: AnyClass = TBViewController().classForCoder
-        var vcs = [vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1]
-        var titles = ["新闻", "专题", "视频","游戏中心","马甲","weibo","Picth","Swift", "木木","Joke"]
+        var vcs = [vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1]
+        var titles = ["新闻", "专题", "视频","新闻", "专题", "视频","新闻", "专题", "视频"]
         let pageController = YGPageController()
         pageController.loadViewControllers(vcs, andTitles: titles)
-        pageController.menuViewStyle = .Line
+        pageController.menuViewStyle = .Default
         self.addChildViewController(pageController)
         view.addSubview(pageController.view)
     }

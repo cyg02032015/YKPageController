@@ -14,15 +14,15 @@ public enum MenuViewStyle: Int {
     case Bigger
 }
 
-public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDelegate, MenuViewDelegate{
+
+
+
+
+public class YGPageController: UIViewController, NSCacheDelegate, MenuViewDelegate{
     
     //MARK: 公共变量门
-    public var menuHeight: CGFloat = 40
+    public var menuHeight: CGFloat = MENUHEIGHT
     public var cacheCount: Int!
-    public var backGroundColor: UIColor = UIColor.whiteColor()
-    public var titleColor: UIColor = UIColor.blackColor()
-    public var titleSelectedColor: UIColor = UIColor.orangeColor()
-    public var titleFont: CGFloat = 16
     var menuViewStyle: MenuViewStyle = .Default
     //MARK: 私有变量门
     private lazy var viewControllers = [AnyClass]()
@@ -56,7 +56,7 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
         
     }
     public override func viewWillLayoutSubviews() {
-        menuView = MenuView(frame: CGRect(x: 0, y:NAVIHEIGHT, width: WIDTH, height: menuHeight), andTitles: titles, andBackgroundcolor: backGroundColor, andTitleColor: titleColor, andTilteSelectedColor: titleSelectedColor, andTitleFont: titleFont, andStyle: menuViewStyle)
+        menuView = MenuView(frame: CGRect(x: 0, y:NAVIHEIGHT, width: WIDTH, height: menuHeight), andTitles: titles, andStyle: menuViewStyle)
         menuView.delegate = self
         view.addSubview(menuView)
         scrollView = UIScrollView(frame: CGRect(x: 0, y: NAVIHEIGHT + menuHeight, width: WIDTH, height: HEIGHT - menuHeight - NAVIHEIGHT))
@@ -111,7 +111,20 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
             return false
         }
     }
-    //MARK: menuViewDelegate
+
+    public override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+      
+    }
+    //MARK: NSCacheDelegate
+    public func cache(cache: NSCache, willEvictObject obj: AnyObject) {
+        //        CGLog(obj)
+    }
+    
+}
+//MARK: menuViewDelegate
+extension YGPageController: MenuViewDelegate {
+    
     public func menuViewBtnClickScrollToView(index: Int) {
         removeViewController(selectController, atIndex: selectIndex)
         selectIndex = index
@@ -126,30 +139,34 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
         }
         scrollView.setContentOffset(CGPoint(x: CGFloat(index) * scrollView.frame.width, y: 0), animated: false)
     }
-    //MARK: ScrollViewDelegate
+
+}
+//MARK: ScrollViewDelegate
+extension YGPageController: UIScrollViewDelegate {
+    
     public func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
         let rate = scrollView.contentOffset.x / scrollView.frame.width
-      for (i , value) in enumerate(viewControllers) {
-        let frame = frameDicts[i]
-        var vc: AnyObject? = dispalyVC[i]
-        if isInScreen(frame!) {
-          if (vc == nil) {
-            //从缓存中取vc
-            vc = controllerCache.objectForKey(i)
-            if vc != nil {//如果缓存中有值添加缓存里的vc
-              addCacheViewController(vc as! UIViewController, atIndex: i)
+        for (i , value) in enumerate(viewControllers) {
+            let frame = frameDicts[i]
+            var vc: AnyObject? = dispalyVC[i]
+            if isInScreen(frame!) {
+                if (vc == nil) {
+                    //从缓存中取vc
+                    vc = controllerCache.objectForKey(i)
+                    if vc != nil {//如果缓存中有值添加缓存里的vc
+                        addCacheViewController(vc as! UIViewController, atIndex: i)
+                    } else {
+                        addViewControllersAtIndex(i)
+                    }
+                }
             } else {
-              addViewControllersAtIndex(i)
+                if vc != nil {
+                    removeViewController(vc as! UIViewController, atIndex: i)
+                }
             }
-          }
-        } else {
-          if vc != nil {
-            removeViewController(vc as! UIViewController, atIndex: i)
-          }
+            
         }
-
-      }
         selectController = dispalyVC[page]
         menuView.menuViewButtonMove(page, andRate: rate)
     }
@@ -162,13 +179,5 @@ public class YGPageController: UIViewController, UIScrollViewDelegate, NSCacheDe
     public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView.contentOffset.x < 0 || scrollView.contentOffset.x + WIDTH >= scrollView.contentSize.width {return}
     }
-    public override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-      
-    }
-    //MARK: NSCacheDelegate
-    public func cache(cache: NSCache, willEvictObject obj: AnyObject) {
-        //        CGLog(obj)
-    }
-    
+
 }

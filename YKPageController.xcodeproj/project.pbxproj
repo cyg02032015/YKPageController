@@ -12,12 +12,12 @@
 		D845D7181B78A14200C70F46 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D845D7171B78A14200C70F46 /* Images.xcassets */; };
 		D845D71B1B78A14200C70F46 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D845D7191B78A14200C70F46 /* LaunchScreen.xib */; };
 		D845D7271B78A14300C70F46 /* YKPageControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845D7261B78A14300C70F46 /* YKPageControllerTests.swift */; };
-		D845D7351B78A16200C70F46 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845D7301B78A16200C70F46 /* MenuView.swift */; };
 		D845D7371B78A16200C70F46 /* TBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845D7321B78A16200C70F46 /* TBViewController.swift */; };
-		D845D7391B78A16200C70F46 /* YGPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845D7341B78A16200C70F46 /* YGPageController.swift */; };
 		D845D73B1B78A18B00C70F46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845D73A1B78A18B00C70F46 /* ViewController.swift */; };
-		D8A1E65B1B7B344B005C4EFD /* YGGlobel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A1E65A1B7B344B005C4EFD /* YGGlobel.swift */; };
-		D8CBF9751B81D1E100BD0826 /* CGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CBF9741B81D1E100BD0826 /* CGButton.swift */; };
+		D8E5B6231B949812004A25FB /* CGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5B61F1B949812004A25FB /* CGButton.swift */; };
+		D8E5B6241B949812004A25FB /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5B6201B949812004A25FB /* MenuView.swift */; };
+		D8E5B6251B949812004A25FB /* YGGlobel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5B6211B949812004A25FB /* YGGlobel.swift */; };
+		D8E5B6261B949812004A25FB /* YGPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E5B6221B949812004A25FB /* YGPageController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,12 +40,12 @@
 		D845D7201B78A14300C70F46 /* YKPageControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YKPageControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D845D7251B78A14300C70F46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D845D7261B78A14300C70F46 /* YKPageControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YKPageControllerTests.swift; sourceTree = "<group>"; };
-		D845D7301B78A16200C70F46 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MenuView.swift; sourceTree = "<group>"; };
 		D845D7321B78A16200C70F46 /* TBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBViewController.swift; sourceTree = "<group>"; };
-		D845D7341B78A16200C70F46 /* YGPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YGPageController.swift; sourceTree = "<group>"; };
 		D845D73A1B78A18B00C70F46 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D8A1E65A1B7B344B005C4EFD /* YGGlobel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YGGlobel.swift; sourceTree = "<group>"; };
-		D8CBF9741B81D1E100BD0826 /* CGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGButton.swift; sourceTree = "<group>"; };
+		D8E5B61F1B949812004A25FB /* CGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGButton.swift; sourceTree = "<group>"; };
+		D8E5B6201B949812004A25FB /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		D8E5B6211B949812004A25FB /* YGGlobel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YGGlobel.swift; sourceTree = "<group>"; };
+		D8E5B6221B949812004A25FB /* YGPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YGPageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,13 +87,10 @@
 		D845D70D1B78A14200C70F46 /* YKPageController */ = {
 			isa = PBXGroup;
 			children = (
+				D8E5B61E1B949812004A25FB /* YGPageController */,
 				D845D7101B78A14200C70F46 /* AppDelegate.swift */,
 				D845D73A1B78A18B00C70F46 /* ViewController.swift */,
 				D845D7321B78A16200C70F46 /* TBViewController.swift */,
-				D845D7301B78A16200C70F46 /* MenuView.swift */,
-				D8CBF9741B81D1E100BD0826 /* CGButton.swift */,
-				D845D7341B78A16200C70F46 /* YGPageController.swift */,
-				D8A1E65A1B7B344B005C4EFD /* YGGlobel.swift */,
 				D845D7141B78A14200C70F46 /* Main.storyboard */,
 				D845D7171B78A14200C70F46 /* Images.xcassets */,
 				D845D7191B78A14200C70F46 /* LaunchScreen.xib */,
@@ -125,6 +122,17 @@
 				D845D7251B78A14300C70F46 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D8E5B61E1B949812004A25FB /* YGPageController */ = {
+			isa = PBXGroup;
+			children = (
+				D8E5B61F1B949812004A25FB /* CGButton.swift */,
+				D8E5B6201B949812004A25FB /* MenuView.swift */,
+				D8E5B6211B949812004A25FB /* YGGlobel.swift */,
+				D8E5B6221B949812004A25FB /* YGPageController.swift */,
+			);
+			path = YGPageController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,13 +235,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8CBF9751B81D1E100BD0826 /* CGButton.swift in Sources */,
-				D8A1E65B1B7B344B005C4EFD /* YGGlobel.swift in Sources */,
+				D8E5B6261B949812004A25FB /* YGPageController.swift in Sources */,
 				D845D73B1B78A18B00C70F46 /* ViewController.swift in Sources */,
-				D845D7391B78A16200C70F46 /* YGPageController.swift in Sources */,
+				D8E5B6251B949812004A25FB /* YGGlobel.swift in Sources */,
+				D8E5B6241B949812004A25FB /* MenuView.swift in Sources */,
 				D845D7371B78A16200C70F46 /* TBViewController.swift in Sources */,
-				D845D7351B78A16200C70F46 /* MenuView.swift in Sources */,
 				D845D7111B78A14200C70F46 /* AppDelegate.swift in Sources */,
+				D8E5B6231B949812004A25FB /* CGButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
