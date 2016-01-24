@@ -18,7 +18,7 @@ public enum MenuViewStyle: Int {
 
 
 
-public class YGPageController: UIViewController, NSCacheDelegate, MenuViewDelegate{
+public class YGPageController: UIViewController, NSCacheDelegate {
     
     //MARK: 公共变量门
     public var menuHeight: CGFloat = MENUHEIGHT
@@ -36,7 +36,7 @@ public class YGPageController: UIViewController, NSCacheDelegate, MenuViewDelega
     private var selectIndex: Int = -1
     private lazy var controllerCache: NSCache = self.lazyControllerCache()
     private func lazyControllerCache() -> NSCache {
-        var cache = NSCache()
+        let cache = NSCache()
         cache.delegate = self
         if cacheCount == nil {
             cache.countLimit = 3
@@ -75,9 +75,9 @@ public class YGPageController: UIViewController, NSCacheDelegate, MenuViewDelega
         }
         addViewControllersAtIndex(0)
     }
-    private func addViewControllersAtIndex(index: Int) {
+  private func addViewControllersAtIndex(index: Int) {
         let vcc: AnyClass = viewControllers[index]
-        let vc = vcc.new() as! UIViewController
+        let vc = (vcc as! UIViewController.Type).init()
         self.addChildViewController(vc)
         vc.view.frame = frameDicts[index]!
         dispalyVC[index] = vc
@@ -139,7 +139,6 @@ extension YGPageController: MenuViewDelegate {
         }
         scrollView.setContentOffset(CGPoint(x: CGFloat(index) * scrollView.frame.width, y: 0), animated: false)
     }
-
 }
 //MARK: ScrollViewDelegate
 extension YGPageController: UIScrollViewDelegate {
@@ -147,7 +146,7 @@ extension YGPageController: UIScrollViewDelegate {
     public func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = Int(scrollView.contentOffset.x / scrollView.frame.width)
         let rate = scrollView.contentOffset.x / scrollView.frame.width
-        for (i , value) in enumerate(viewControllers) {
+        for (i , _) in viewControllers.enumerate() {
             let frame = frameDicts[i]
             var vc: AnyObject? = dispalyVC[i]
             if isInScreen(frame!) {

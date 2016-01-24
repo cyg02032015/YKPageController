@@ -9,7 +9,7 @@
 import UIKit
 
 func CGLog<T>(message: T,file: String = __FILE__,function: String = __FUNCTION__,line: Int = __LINE__) {
-    println("\(file.lastPathComponent)[\(line)], \(function)---:\(message)")
+    print("\((file as NSString).lastPathComponent)[\(line)], \(function)---:\(message)")
 }
 
 

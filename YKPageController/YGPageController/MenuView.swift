@@ -50,7 +50,7 @@ public class MenuView: UIView, UIScrollViewDelegate {
         configCGButton()
     }
     private func configCGButton(){
-        for (i,_) in enumerate(titles) {
+        for (i,_) in titles.enumerate() {
             let btn = CGButton(titles: titles, andIndex: i)
             btn.tag = i + 100
             btn.titleLabel?.font = fontWithCGFloat(TITLEFONT)
@@ -67,7 +67,7 @@ public class MenuView: UIView, UIScrollViewDelegate {
         var btn: CGButton = CGButton()
         var btnPre: CGButton = CGButton()
         var sumWidth: CGFloat = 0
-        for (i, _) in enumerate(scrollView.subviews) {
+        for (i, _) in scrollView.subviews.enumerate() {
             var btnX: CGFloat = 0 ,btnY: CGFloat ,btnW: CGFloat ,btnH: CGFloat
             btn = scrollView.subviews[i] as! CGButton
             if i >= 1 {
@@ -84,7 +84,7 @@ public class MenuView: UIView, UIScrollViewDelegate {
                 scrollView.contentSize = CGSize(width: btnX + btnW + margin, height: 0)
                 scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
             }
-            btn.backgroundColor = UIColor.grayColor()
+//            btn.backgroundColor = UIColor.grayColor()
                 if 0 == i {
                 btn.selected = true
                 selectedBtn = btn
@@ -100,8 +100,8 @@ public class MenuView: UIView, UIScrollViewDelegate {
             isNoEnter = true
             var btnP: CGButton = CGButton()
             let m = (WIDTH - sum) / CGFloat(scrollView.subviews.count + 1)
-            for (i, _) in enumerate(scrollView.subviews) {
-                var btn = scrollView.subviews[i] as! CGButton
+            for (i, _) in scrollView.subviews.enumerate() {
+                let btn = scrollView.subviews[i] as! CGButton
                 if i >= 1 {
                     btnP = scrollView.subviews[i - 1] as! CGButton
                 }
@@ -228,7 +228,7 @@ public class MenuView: UIView, UIScrollViewDelegate {
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("")
     }
     
@@ -238,7 +238,7 @@ class LineView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("woca")
     }
     var radius: CGFloat = 2
@@ -255,7 +255,7 @@ class LineView: UIView {
         CGContextAddArcToPoint(context, minx, maxy, minx, midy, radius);
         CGContextClosePath(context)
         CGContextSetFillColorWithColor(context, UIColor.redColor().CGColor);
-        CGContextDrawPath(context,kCGPathFill);
+        CGContextDrawPath(context,CGPathDrawingMode.Fill);
     }
 }
 

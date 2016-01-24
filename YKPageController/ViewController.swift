@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         let vc1: AnyClass = TBViewController().classForCoder
-        var vcs = [vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1]
-        var titles = ["新闻", "专题", "视频","新闻", "专题", "视频","新闻", "专题", "视频"]
+        let vcs = [vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1,vc1]
+        let titles = ["新闻", "专题", "视频","新闻", "专题", "视频","新闻", "专题", "视频"]
         let pageController = YGPageController()
         pageController.loadViewControllers(vcs, andTitles: titles)
         pageController.menuViewStyle = .Default

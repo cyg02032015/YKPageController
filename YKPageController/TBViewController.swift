@@ -29,8 +29,8 @@ class TBViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return 20
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        cell.textLabel?.text = "nimabi"
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell!
+        cell.textLabel?.text = "测试\(indexPath.row)"
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
